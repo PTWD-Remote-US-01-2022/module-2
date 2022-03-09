@@ -1,0 +1,31 @@
+<h2> The random student is: 🥁🥁🥁🥁 </h2>
+
+<h3> {{ randomStudent.firstName }} {{ randomStudent.lastName }} </h3>
+
+<p> Bootcamp(s): </p>
+
+<ul>
+    {{#each randomStudent.bootcamps }}
+        <li> {{ this.type }} </li>
+
+        {{#if this.graduated }}
+            <p> Graduated: {{ this.year }} </p>
+        {{else}}
+            <p> Still didn't graduate. </p>
+        {{/if}}
+    {{/each}}
+
+    {{!-- {{#if randomStudent.isCareerChanger }}
+        <p> This student is career changer. </p>
+    {{else}}
+        <p> This student is not career changer. </p>
+    {{/if}} --}}
+
+    {{#unless randomStudent.isCareerChanger}}
+        <p><b> This student is definitely not a career changer!!! </b></p>
+    {{/unless}}
+</ul>
+
+<div>
+    <a href="/random-student"> Pick another random student </a>
+</div>
