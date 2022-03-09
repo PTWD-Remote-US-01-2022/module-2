@@ -73,7 +73,7 @@ app.get("/students-miami", (req, res, next) => {
     const justStudentsNames = studentsList.map(student => student.firstName);
 
     // it is already pre-fixed with "views" so we don't have to put the full path
-    // meaning it is wrong ❌ views/hbs-files/students.hbs ❌
+    // meaning it is wrong ❌ views/hbs-files/students-details.hbs ❌
 
     const data = {
         cohort: "PTWD 01/2022",
@@ -92,7 +92,7 @@ app.get("/students-berlin", (req, res, next) => {
     // console.log(justStudentsNames);
 
     // it is already pre-fixed with "views" so we don't have to put the full path
-    // meaning it is wrong ❌ views/hbs-files/students.hbs ❌
+    // meaning it is wrong ❌ views/hbs-files/students-details.hbs ❌
 
     const data = {
         cohort: "UXUI PT 02/2021",
