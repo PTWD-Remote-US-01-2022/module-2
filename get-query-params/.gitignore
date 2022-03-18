@@ -1,1 +1,4 @@
 node_modules
+
+# env shouldn't be pushed but we are pushing it now for learning purposes
+# .env
