@@ -1,0 +1,25 @@
+<h2> Fake Login form </h2>
+
+<form action="/fake-login" method="POST">
+    <label>
+        Username: <input type="text" name="user_username">
+    <label>
+    
+    <br>
+    <label>
+        Password: <input type="password" name="user_password">
+    <label>
+    <br>   
+
+    <button> Login </button>
+<form>
+
+{{#if user_username}}
+
+<p>Welcome, {{ user_username }}!</p>
+
+{{else}}
+
+<p> After you submit the form, you will see the welcome message! </p>
+
+{{/if}}

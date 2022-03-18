@@ -1,0 +1,37 @@
+<a href="/users/sandrabosk"> Check the user SANDRABOSK</a>
+<br>
+<a href="/users/rabiul"> Check the user RABIUL</a>
+
+<br>
+<a href="/store/clothes/winer/coat"> Check specific store and clothes </a>
+<br>
+
+<a href="/products/toys?prodID=123"> Check for TOY with ID 123 </a>
+
+<br>
+
+<form action="/store/search" method="GET">
+    <label>
+        {{!-- to get the details that user inputted in this field,
+        we need to say request.query.product_name --}}
+        {{!-- product_name -> is the value of the attribute "name" --}}
+        Name: <input type="text" name="product_name">
+    <label>
+
+    <br>
+
+    <label>
+        Size: <input type="text" name="product_size">
+    <label>
+    
+    <br>
+
+    <label>
+        Color: <input type="text" name="product_color">
+    <label>
+
+    <br>
+
+    <button>Submit search</button>
+
+</form>
