@@ -1,0 +1,31 @@
+<h2>Create a new author</h2>
+
+{{!-- localhost:3000/authors --}}
+<form action="/authors/create" method="POST">
+  <label> First Name
+    <input type="text" name="firstName">
+  </label>
+  <br>
+
+  <label> Last Name
+    <input type="text" name="lastName">
+  </label>
+  <br>
+
+  <label> Nationality
+    <input type="text" name="nationality">
+  </label>
+  <br>
+
+  <label> Birthday
+    <input type="text" name="birthday">
+  </label>
+  <br>
+
+  <label> Image URL
+    <input type="text" name="pictureUrl">
+  </label>
+  <br>
+  
+  <button type="submit"> Save </button>
+</form>
