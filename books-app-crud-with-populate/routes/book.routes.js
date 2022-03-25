@@ -21,9 +21,33 @@ router.post("/books/create", (req, res, next) => {
     const { title, description, author, rating } = req.body;
     Book.create({ title, description, author, rating })
     .then(newBookFromDB => {
-        console.log(newBookFromDB)
+        // console.log(newBookFromDB);
+        res.redirect("/books");
     })
     .catch(err => console.log(`Error while saving new book: ${err}`))
+})
+
+
+// get route to display all the books from the DB
+router.get("/books", (req, res, next) => {
+    Book.find()
+    .then(booksFromDB => {
+        res.render("book-views/book-list", { booksFromDB })
+    })
+    .catch(err => console.log(`Error while getting the books from the DB: ${err}`))
+})
+
+// get route to show a specific book details
+
+router.get("/books/:bookID", (req, res, next) => {
+    Book.findById(req.params.bookID)
+    .populate("author")
+    .then(bookFromDB => {
+        // console.log(bookFromDB);
+
+        res.render("book-views/book-details", bookFromDB)
+    })
+    .catch(err => console.log(`Error while getting a details of specific book: ${err}`))
 })
 
 

@@ -1,0 +1,8 @@
+<h2> Books </h2>
+
+<ul>
+
+    {{#each booksFromDB}}
+        <li> <a href="/books/{{_id}}"> {{ title }} </a> </li>
+    {{/each}}
+</ul>
