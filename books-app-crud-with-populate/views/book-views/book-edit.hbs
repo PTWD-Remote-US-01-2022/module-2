@@ -1,0 +1,36 @@
+<h2> Update the book details </h2>
+
+<form action="/books/{{bookThatWillBeEdited._id}}/update" method="POST">
+    <label>
+        Title: <input type="text" name="title" value="{{bookThatWillBeEdited.title}}"/>
+    <label>
+
+    <br>
+
+    <label>
+        Description: <textarea name="description" cols="30" rows="5"> {{bookThatWillBeEdited.description}} </textarea>
+    <label>
+
+    <br>
+
+    <label>
+        Author:
+        <select name="author">
+            <option value="{{bookThatWillBeEdited.author._id}}" selected> {{bookThatWillBeEdited.author.firstName}} {{bookThatWillBeEdited.author.lastName}} </option>
+
+            {{#each allOtherAuthors}}
+                <option value={{ _id }}> {{firstName}} {{lastName}} </option>
+            {{/each}}
+        </select>
+    <label>
+
+    <br>
+
+    <label>
+        Rating: <input type="number" name="rating" min="1" max="10" value="{{bookThatWillBeEdited.rating}}"/>
+    <label>
+
+    <br>
+
+    <button> Save </button>
+</form>

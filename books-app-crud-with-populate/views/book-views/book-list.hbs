@@ -3,6 +3,12 @@
 <ul>
 
     {{#each booksFromDB}}
-        <li> <a href="/books/{{_id}}"> {{ title }} </a> </li>
+        <li> <a href="/books/{{_id}}"> {{ title }} </a> 
+            <form action="/books/{{_id}}/delete" method="post">
+                <button> Delete </button>
+            </form>
+            <a href="/books/{{_id}}/edit"> Edit </a>
+        </li>
+
     {{/each}}
 </ul>
