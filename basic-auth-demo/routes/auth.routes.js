@@ -5,9 +5,14 @@ const mongoose = require("mongoose");
 
 const User = require("../models/User.model");
 
+
+const { isLoggedIn, isLoggedOut } = require("../config/route-guard.config");
+
 // ****************************************************************************
 // GET route to display the signup form to a user
-router.get("/signup", (req, res, next) => {
+
+//                     ✅ add ✅
+router.get("/signup", isLoggedOut, (req, res, next) => {
   res.render("auth-pages/signup.hbs");
 });
 
@@ -71,8 +76,8 @@ router.post("/create-account", (req, res, next) => {
 
 // ****************************************************************************
 // GET route to display the login form
-
-router.get("/login", (req, res, next) => res.render("auth-pages/login.hbs"));
+//                     ✅ add ✅
+router.get("/login", isLoggedOut, (req, res, next) => res.render("auth-pages/login.hbs"));
 
 // ****************************************************************************
 // POST route to process the login form (enable a user to login)
@@ -101,6 +106,7 @@ router.post("/process-login", (req, res, next) => {
             })
 
             return;
+
         } else if(bcryptjs.compareSync(password, userFromDB.passwordHash)){ // if user exists, check if
             // password user inputted matches with the one saved in the DB
             // if yes, then render the profile page
@@ -121,12 +127,24 @@ router.post("/process-login", (req, res, next) => {
     })
 })
 
+// ****************************************************************************
+// POST route to logout the user
+// <form action="/logout" method="POST">
+
+router.post("/logout", (req, res, next) => {
+    req.session.destroy( err => {
+        console.log(`Err while logout: ${err}`);
+
+        if(err) next(err);
+        res.redirect("/")
+    });
+})
 
 // ****************************************************************************
 // GET route to display user's profile page
-router.get("/profile", (req, res, next) => {
-
-    res.render("user-pages/profile-page", { userInSession: req.session.currentUser })
+//                      ✅ add ✅
+router.get("/profile", isLoggedIn, (req, res, next) => {
+    res.render("user-pages/profile-page");
 })
 
 
