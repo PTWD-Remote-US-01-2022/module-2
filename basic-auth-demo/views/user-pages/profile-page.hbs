@@ -10,6 +10,17 @@
 
 {{#if userInSession}}
     <h3>Welcome, {{ userInSession.username }}</h3>
+    
+    <br>
+
+    <img src="{{userInSession.profileImg}}" alt="profile image" width="300">
+
+    <br>
+
+    <form action="/profile/change-image" method="POST" enctype="multipart/form-data">
+        <input type="file" name="image">
+        <button> Change image </button>
+    </form>
 
     <button> <a href="/profile"> Reload! </a></button>
 

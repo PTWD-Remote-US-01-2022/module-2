@@ -19,6 +19,10 @@ const userSchema = new Schema(
     passwordHash: {
       type: String,
       required: [true, "Password is required."]
+    },
+    profileImg: {
+      type: String,
+      default:"https://mpchsschool.in/wp-content/uploads/2019/10/default-profile-picture.png"
     }
   },
   {

@@ -5,8 +5,11 @@ const mongoose = require("mongoose");
 
 const User = require("../models/User.model");
 
-
 const { isLoggedIn, isLoggedOut } = require("../config/route-guard.config");
+
+// Image Upload
+
+const cloudinary = require("../config/cloudinary.config");
 
 // ****************************************************************************
 // GET route to display the signup form to a user
@@ -19,12 +22,23 @@ router.get("/signup", isLoggedOut, (req, res, next) => {
 // ****************************************************************************
 // POST route to save a new user in the database
 // <form action="/create-account" method="POST">
-router.post("/create-account", (req, res, next) => {
+//            :added ==> <input type="file" name="image" />
+router.post("/create-account", cloudinary.single("image"), (req, res, next) => {
     // console.log(req.body);
+
+    // console.log("image: ", req.file);
 
     const saltRounds = 10;
 
     const { username, email, password } = req.body;
+
+    let path;
+
+    if(req.file){
+        path = req.file.path;
+    }
+
+    // const path = req.file.path;
 
     if (!username || !email || !password){
         res.render("auth-pages/signup", {
@@ -50,7 +64,8 @@ router.post("/create-account", (req, res, next) => {
         return User.create({ 
             username, 
             email,
-            passwordHash: hashedPassword
+            passwordHash: hashedPassword,
+            profileImg: path
         })
     })
     .then(userFromDB => {
@@ -145,6 +160,26 @@ router.post("/logout", (req, res, next) => {
 //                      ✅ add ✅
 router.get("/profile", isLoggedIn, (req, res, next) => {
     res.render("user-pages/profile-page");
+})
+
+// POST route to change the profile image
+// <form action="/profile/change-image" method="POST" enctype="multipart/form-data">
+
+router.post("/profile/change-image", cloudinary.single("image"), (req, res, next) => {
+
+    User.findByIdAndUpdate(req.session.currentUser._id, { profileImg: req.file.path }, { new: true })
+    .then(updatedUser => {
+
+        // to make sure the most updated changes are saved in the logged in user object
+        // we are saving updated user in the session
+        req.session.currentUser = updatedUser;
+        res.redirect("/profile")
+    })
+    .catch(err => {
+        console.log(err);
+        next(err);
+    })
+    
 })
 
 
